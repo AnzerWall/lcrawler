@@ -1,0 +1,12 @@
+{
+  "name": "lcrawler",
+  "version": "0.0.1",
+  "dependencies": {
+    "chokidar": "^2.0.3",
+    "commander": "^2.15.1",
+    "js-yaml": "^3.11.0",
+    "sffjs": "^1.13.2",
+    "mongodb": "^3.1.0-beta4"
+  },
+  "author": "anzerwall"
+}

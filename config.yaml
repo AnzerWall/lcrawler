@@ -1,0 +1,24 @@
+input:
+  file:
+    match: "/root/logs/action-log-*.log" # 需要扫描的日志文件
+    access_file_path: "/root/logs/position.access" # 指定一个文件用于保存访问记录，用于跳过以前读取过的日志文件
+    access_save_interval: # 决定保存访问文件的间隔，默认为10000ms
+    bufferSize: 1000 # 读入文件的缓冲大小，决定读取速率，一般不需要设置
+filter:
+- type: json
+- type: add_today
+- type: logic
+  if:
+    condition: "field_exists"
+    field: "action"
+  then:
+    action: "change_output"
+    output: "mongodb"
+  else:
+    action: "change_output"
+    output: "$null"
+output:
+  mongodb:
+    database: "action_log"
+    collection: "{action}_{$today}"
+    uri: "mongodb://localhost:5000"
